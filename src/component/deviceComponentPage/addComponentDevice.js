@@ -1,4 +1,4 @@
-import { Center, Input, Select} from '@chakra-ui/react';
+import { Center, Input, Select } from '@chakra-ui/react';
 import { Text, Button, Stack, Link, useToast } from '@chakra-ui/react';
 import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
@@ -6,13 +6,12 @@ import axios from 'axios';
 import { API, APIName } from '/QuanLyPhongMay/QuanLyPM/src/service/apiconfig';
 import { useNavigate } from 'react-router-dom';
 
-export default function AddDevice() {
+export default function AddDeviceComponent() {
 
+    const [IDDEVICEComponent, setIDDEVICEComponent] = useState("");
     const [IDDevice, setIDDevice] = useState("");
-    const [IDRoom, setIDRoom] = useState("");
     const [PCCODE, setPCCODE] = useState("");
-    const [NumberOfComputerComponents, setNumberOfComputerComponents] = useState("");
-    const [QuantityOfSoftware, setQuantityOfSoftware] = useState("");
+    const [DEVICEComponentName, setDEVICEComponentName] = useState("");
     const [Status, setStatus] = useState("");
     const [Note, setNote] = useState("");
     const [CreatedAt, setCreatedAt] = useState("");
@@ -21,18 +20,17 @@ export default function AddDevice() {
     const usenavigate = useNavigate();
     const toast = useToast();
 
-    const postDevice = async (e) => {
+    const postDeviceCompoment = async (e) => {
         e.preventDefault();
 
 
         if (validate()) {
-            await axios.post(`${API}${APIName.Device}/AddDevice`,
+            await axios.post(`${API}${APIName.DeviceCompoment}/AddDeviceCompoment`,
                 {
+                    "IDDEVICEComponent": `${IDDEVICEComponent}`,
                     "IDDevice": `${IDDevice}`,
-                    "IDRoom": `${IDRoom}`,
                     "PCCODE": `${PCCODE}`,
-                    "NumberOfComputerComponents": `${NumberOfComputerComponents}`,
-                    "QuantityOfSoftware": `${QuantityOfSoftware}`,
+                    "DEVICEComponentName": `${DEVICEComponentName}`,
                     "Status": `${Status}`,
                     "Note": `${Note}`,
                     "CreatedAt": `${CreatedAt}`,
@@ -54,11 +52,11 @@ export default function AddDevice() {
 
     const validate = () => {
         let result = true;
-        if (IDDevice === '' || IDDevice === null) {
+        if (IDDEVICEComponent === '' || IDDEVICEComponent === null) {
             result = false;
             alert('Please Enter ID Device');
         }
-        if (IDRoom === '' || IDRoom === null) {
+        if (IDDevice === '' || IDDevice === null) {
             result = false;
             alert('Please Enter Id Room');
         }
@@ -66,13 +64,9 @@ export default function AddDevice() {
             result = false;
             alert('Please Enter PC CODE');
         }
-        if (NumberOfComputerComponents === '' || NumberOfComputerComponents === null) {
+        if (DEVICEComponentName === '' || DEVICEComponentName === null) {
             result = false;
             alert('Please Enter Number Of Computer Components');
-        }
-        if (QuantityOfSoftware === '' || QuantityOfSoftware === null) {
-            result = false;
-            alert('Please Enter Quantity Of Software');
         }
         if (Status === '' || Status === null) {
             result = false;
@@ -87,23 +81,23 @@ export default function AddDevice() {
 
     return (
         <>
-            <form onSubmit={postDevice}>
+            <form onSubmit={postDeviceCompoment}>
                 <Center>
-                    <Text fontSize='40px' as='b' color='Blue'>Add Device</Text>
+                    <Text fontSize='40px' as='b' color='Blue'>Add Device Component</Text>
                 </Center>
                 <br />
+                <Center>
+                    <Text fontSize='20px' marginRight={615} as='b'>ID Device Component</Text>
+                </Center>
+                <Center>
+                    <Input variant='filled' placeholder='ID Device Component' marginBottom='5' width='50%' onChange={(e) => setIDDEVICEComponent(e.target.value)} value={IDDEVICEComponent} />
+                </Center>
+
                 <Center>
                     <Text fontSize='20px' marginRight={730} as='b'>ID Device</Text>
                 </Center>
                 <Center>
                     <Input variant='filled' placeholder='ID Device' marginBottom='5' width='50%' onChange={(e) => setIDDevice(e.target.value)} value={IDDevice} />
-                </Center>
-
-                <Center>
-                    <Text fontSize='20px' marginRight={740} as='b'>ID Room</Text>
-                </Center>
-                <Center>
-                    <Input variant='filled' placeholder='ID Room' marginBottom='5' width='50%' onChange={(e) => setIDRoom(e.target.value)} value={IDRoom} />
                 </Center>
 
                 <Center>
@@ -114,27 +108,20 @@ export default function AddDevice() {
                 </Center>
 
                 <Center>
-                    <Text fontSize='20px' marginRight={490} as='b'>Number Of Computer Components</Text>
+                    <Text fontSize='20px' marginRight={580} as='b'>Device Component Name</Text>
                 </Center>
                 <Center>
-                    <Input variant='filled' placeholder='Subject' marginBottom='9' width='50%' onChange={(e) => setNumberOfComputerComponents(e.target.value)} value={NumberOfComputerComponents} />
-                </Center>
-
-                <Center>
-                    <Text fontSize='20px' marginRight={620} as='b'>Quantity Of Software</Text>
-                </Center>
-                <Center>
-                    <Input variant='filled' placeholder='Quantity Of Software' marginBottom='5' width='50%' onChange={(e) => setQuantityOfSoftware(e.target.value)} value={QuantityOfSoftware} />
+                    <Input variant='filled' placeholder='Device Component Name' marginBottom='9' width='50%' onChange={(e) => setDEVICEComponentName(e.target.value)} value={DEVICEComponentName} />
                 </Center>
 
                 <Center>
                     <Text fontSize='20px' marginRight={760} as='b'>Status</Text>
                 </Center>
                 <Center>
-                        <Select variant='filled'  placeholder='Select Status' onChange={(e) => setStatus(e.target.value)} value={Status} marginBottom='9' width='50%'>
-                            <option>Damaged</option>
-                            <option>Undamaged</option>
-                        </Select>
+                    <Select variant='filled' placeholder='Select Status' onChange={(e) => setStatus(e.target.value)} value={Status} marginBottom='9' width='50%'>
+                        <option>Damaged</option>
+                        <option>Undamaged</option>
+                    </Select>
                 </Center>
 
                 <Center>

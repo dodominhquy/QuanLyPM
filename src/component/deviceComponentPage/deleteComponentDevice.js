@@ -6,14 +6,14 @@ import { useState } from 'react';
 import axios from 'axios';
 import { API, APIName } from '/QuanLyPhongMay/QuanLyPM/src/service/apiconfig';
 
-export default function DeleteDevice() {
+export default function DeleteDeviceComponent() {
 
-    const [IDDevice, setIDDevice] = useState("");
+    const [IDDEVICEComponent, setIDDEVICEComponent] = useState("");
     const usenavigate = useNavigate();
 
-    const deleteDevice = async () => {
+    const deleteDeviceCompoment = async () => {
 
-        await axios.delete(`${API}${APIName.Device}/${IDDevice}`
+        await axios.delete(`${API}${APIName.DeviceCompoment}/${IDDEVICEComponent}`
         )
             .then((response) => {
                 alert('Successful')
@@ -31,15 +31,15 @@ export default function DeleteDevice() {
         <>
 
             <Center>
-                <Text fontSize='40px' as='b' color='Blue'>Delete Device</Text>
+                <Text fontSize='40px' as='b' color='Blue'>Delete Device Compoment</Text>
             </Center>
             <br />
-            <form onSubmit={deleteDevice}>
+            <form onSubmit={deleteDeviceCompoment}>
                 <Center>
-                    <Text fontSize='20px' marginRight={745} as='b'>ID Device</Text>
+                    <Text fontSize='20px' marginRight={745} as='b'>ID Device Compoment</Text>
                 </Center>
                 <Center>
-                    <Input variant='filled' placeholder='ID Room' marginBottom='5' width='50%' onChange={(e) => setIDDevice(e.target.value)} value={IDDevice} />
+                    <Input variant='filled' placeholder='ID Room' marginBottom='5' width='50%' onChange={(e) => setIDDEVICEComponent(e.target.value)} value={IDDEVICEComponent} />
                 </Center>
 
                 <Center>

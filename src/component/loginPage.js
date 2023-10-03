@@ -10,7 +10,7 @@ import { Center } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/react';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Image } from '@chakra-ui/react';
-import { AspectRatio } from '@chakra-ui/react';
+import { AspectRatio, useToast } from '@chakra-ui/react';
 import { API, APIName } from '../service/apiconfig';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -21,39 +21,51 @@ export default function LoginPage() {
   const [Password, setPassword] = useState('');
 
   const usenavigate = useNavigate();
+  const toast = useToast();
+
+
+  const localStorage = window.localStorage;
+
+  localStorage.setItem('Username', JSON.stringify(Username));
 
   const ProceedLogin = async (e) => {
     e.preventDefault(); // Fix the typo here
 
-      if (validate()) {
-         await axios.post(`${API}${APIName.Login}/Login`,
-          {
-            "Username": `${Username}`,
-            "Password": `${Password}`
-          }
-        )
-          .then( (response) => {
-            if(Object.keys(response).length === 0){
-              alert('Please Enter valid username')
-            } else{
-              console.log(response);
-              if(response.data[0].Password === Password){
-                alert('Success');
-                  usenavigate({
-                    pathname:'/homepage',
-                    search: `${(Username)}`
+    if (validate()) {
+      await axios.post(`${API}${APIName.Login}/Login`,
+        {
+          "Username": `${Username}`,
+          "Password": `${Password}`
+        }
+      )
+        .then((response) => {
+          if (Object.keys(response).length === 0) {
+            alert('Please Enter valid username')
+          } else {
+            console.log(response);
+            if (response.data[0].Password === Password) {
+              alert('Success');
+              window.onload = function () {
+                if (localStorage) {
+                  document.getElementById('contactForm').addEventListener('submit', function () {
+                    var Username = document.getElementById('Username').value;
+                    localStorage.setItem('Username', Username);
                   });
-                  
-              }else{
-                alert('Please Enter valid credentials');
+                }
               }
+              usenavigate('/homepage');
+
+            } else {
+              alert('Please Enter valid credentials');
             }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        
-      }
+          }
+        })
+        .catch(function (error) {
+          alert('error');
+          console.log(error);
+        });
+
+    }
 
   };
 
@@ -123,7 +135,14 @@ export default function LoginPage() {
                 </InputGroup>
               </FormControl>
               <br />
-              <Button colorScheme='blue' variant='solid' width='20%' type='submit'>
+              <Button colorScheme='blue' variant='solid' width='20%' type='submit' onClick={() =>
+                toast({
+                  title: 'Loading',
+                  status: 'loading',
+                  duration: 500,
+                  isClosable: true,
+                })
+              }>
                 LOGIN
               </Button>
             </GridItem>

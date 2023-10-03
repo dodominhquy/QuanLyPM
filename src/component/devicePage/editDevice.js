@@ -1,28 +1,25 @@
 import { Center, Input, Select } from '@chakra-ui/react';
-import { Text, Button, Stack, Link, Textarea } from '@chakra-ui/react';
-import { EditIcon, CloseIcon } from '@chakra-ui/icons';
+import { Text, Button, Stack, Link, useToast } from '@chakra-ui/react';
+import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import axios from 'axios';
-import { API, APIName } from '/REACTJS_LYTHUYET/WebBanHang/Webbanhang/quanly/src/service/apiconfig';
+import { API, APIName } from '/QuanLyPhongMay/QuanLyPM/src/service/apiconfig';
 import { useNavigate } from 'react-router-dom';
 
 export default function EditDevice() {
 
     const [IDDevice, setIDDevice] = useState("");
     const [IDRoom, setIDRoom] = useState("");
-    const [Monitor, setMonitor] = useState("");
-    const [Keyboard, setKeyboard] = useState("");
-    const [Mouse, setMouse] = useState("");
-    const [PCcase, setPCcase] = useState("");
+    const [PCCODE, setPCCODE] = useState("");
+    const [NumberOfComputerComponents, setNumberOfComputerComponents] = useState("");
     const [QuantityOfSoftware, setQuantityOfSoftware] = useState("");
     const [Status, setStatus] = useState("");
     const [Note, setNote] = useState("");
     const [CreatedAt, setCreatedAt] = useState("");
     const [UpdatedAt, setUpdatedAt] = useState("");
 
-
     const usenavigate = useNavigate();
-
+    const toast = useToast();
 
     const putDevice = async (e) => {
         e.preventDefault();
@@ -33,10 +30,8 @@ export default function EditDevice() {
                 {
                     "IDDevice": `${IDDevice}`,
                     "IDRoom": `${IDRoom}`,
-                    "Monitor": `${Monitor}`,
-                    "Keyboard": `${Keyboard}`,
-                    "Mouse": `${Mouse}`,
-                    "PCcase": `${PCcase}`,
+                    "PCCODE": `${PCCODE}`,
+                    "NumberOfComputerComponents": `${NumberOfComputerComponents}`,
                     "QuantityOfSoftware": `${QuantityOfSoftware}`,
                     "Status": `${Status}`,
                     "Note": `${Note}`,
@@ -50,12 +45,12 @@ export default function EditDevice() {
                     usenavigate('/homepage');
                 })
                 .catch(function (error) {
+                    alert('error');
                     console.log(error);
                 });
         }
 
     };
-
 
     const validate = () => {
         let result = true;
@@ -65,23 +60,15 @@ export default function EditDevice() {
         }
         if (IDRoom === '' || IDRoom === null) {
             result = false;
-            alert('Please Enter ID Room');
+            alert('Please Enter Id Room');
         }
-        if (Monitor === '' || Monitor === null) {
+        if (PCCODE === '' || PCCODE === null) {
             result = false;
-            alert('Please Enter Monitor');
+            alert('Please Enter PC CODE');
         }
-        if (Keyboard === '' || Keyboard === null) {
+        if (NumberOfComputerComponents === '' || NumberOfComputerComponents === null) {
             result = false;
-            alert('Please Enter Key board');
-        }
-        if (Mouse === '' || Mouse === null) {
-            result = false;
-            alert('Please Enter Mouse');
-        }
-        if (PCcase === '' || PCcase === null) {
-            result = false;
-            alert('Please Enter PC case');
+            alert('Please Enter Number Of Computer Components');
         }
         if (QuantityOfSoftware === '' || QuantityOfSoftware === null) {
             result = false;
@@ -94,14 +81,6 @@ export default function EditDevice() {
         if (Note === '' || Note === null) {
             result = false;
             alert('Please Enter Note');
-        }
-        if (CreatedAt === '' || CreatedAt === null) {
-            result = false;
-            alert('Please Enter Created At');
-        }
-        if (UpdatedAt === '' || UpdatedAt === null) {
-            result = false;
-            alert('Please Enter Updated At');
         }
         return result;
     }
@@ -121,55 +100,40 @@ export default function EditDevice() {
                 </Center>
 
                 <Center>
-                    <Text fontSize='20px' marginRight={735} as='b'>ID Room</Text>
+                    <Text fontSize='20px' marginRight={740} as='b'>ID Room</Text>
                 </Center>
                 <Center>
                     <Input variant='filled' placeholder='ID Room' marginBottom='5' width='50%' onChange={(e) => setIDRoom(e.target.value)} value={IDRoom} />
                 </Center>
 
                 <Center>
-                    <Text fontSize='20px' marginRight={740} as='b'>Monitor</Text>
+                    <Text fontSize='20px' marginRight={740} as='b'>PC Code</Text>
                 </Center>
                 <Center>
-                    <Input variant='filled' placeholder='Monitor' marginBottom='5' width='50%' onChange={(e) => setMonitor(e.target.value)} value={Monitor} />
-                </Center>
-
-                <Center>
-                    <Text fontSize='20px' marginRight={722} as='b'>Key Board</Text>
-                </Center>
-                <Center>
-                    <Input variant='filled' placeholder='Key Board' marginBottom='9' width='50%' onChange={(e) => setKeyboard(e.target.value)} value={Keyboard} />
+                    <Input variant='filled' placeholder='PC Code' marginBottom='9' width='50%' onChange={(e) => setPCCODE(e.target.value)} value={PCCODE} />
                 </Center>
 
                 <Center>
-                    <Text fontSize='20px' marginRight={752} as='b'>Mouse</Text>
+                    <Text fontSize='20px' marginRight={490} as='b'>Number Of Computer Components</Text>
                 </Center>
                 <Center>
-                    <Input variant='filled' placeholder='Mouse' marginBottom='5' width='50%' onChange={(e) => setMouse(e.target.value)} value={Mouse} />
-                </Center>
-
-                <Center>
-                    <Text fontSize='20px' marginRight={740} as='b'>PC Case</Text>
-                </Center>
-                <Center>
-                    <Input variant='filled' placeholder='PC Case' marginBottom='5' width='50%' onChange={(e) => setPCcase(e.target.value)} value={PCcase} />
+                    <Input variant='filled' placeholder='Subject' marginBottom='9' width='50%' onChange={(e) => setNumberOfComputerComponents(e.target.value)} value={NumberOfComputerComponents} />
                 </Center>
 
                 <Center>
-                    <Text fontSize='20px' marginRight={620} as='b'>Quantity of software</Text>
+                    <Text fontSize='20px' marginRight={620} as='b'>Quantity Of Software</Text>
                 </Center>
                 <Center>
-                    <Input variant='filled' placeholder='Quantity of software' marginBottom='5' width='50%' onChange={(e) => setQuantityOfSoftware(e.target.value)} value={QuantityOfSoftware} />
+                    <Input variant='filled' placeholder='Quantity Of Software' marginBottom='5' width='50%' onChange={(e) => setQuantityOfSoftware(e.target.value)} value={QuantityOfSoftware} />
                 </Center>
 
                 <Center>
-                    <Text fontSize='20px' marginRight={755} as='b'>Status</Text>
+                    <Text fontSize='20px' marginRight={760} as='b'>Status</Text>
                 </Center>
                 <Center>
-                    <Select marginBottom='9' width='50%' variant='filled' onChange={(e) => setStatus(e.target.value)} value={Status}>
-                        <option value='None'>None</option>
-                        <option value='Active'>Active</option>
-                        <option value='Inactive'>Inactive</option>
+                    <Select variant='filled' placeholder='Select Status' onChange={(e) => setStatus(e.target.value)} value={Status} marginBottom='9' width='50%'>
+                        <option>Damaged</option>
+                        <option>Undamaged</option>
                     </Select>
                 </Center>
 
@@ -177,32 +141,48 @@ export default function EditDevice() {
                     <Text fontSize='20px' marginRight={770} as='b'>Note</Text>
                 </Center>
                 <Center>
-                    <Textarea variant='filled' placeholder='Note cannot be empty' marginBottom='9' width='50%' onChange={(e) => setNote(e.target.value)} value={Note} />
+                    <Input variant='filled' placeholder='Note' marginBottom='9' width='50%' onChange={(e) => setNote(e.target.value)} value={Note} />
                 </Center>
 
                 <Center>
-                    <Text fontSize='20px' marginRight={725} as='b'>Created At</Text>
+                    <Text fontSize='20px' marginRight={720} as='b'>Created At</Text>
                 </Center>
                 <Center>
-                    <Input variant='filled' placeholder='Created At' marginBottom='5' width='50%' onChange={(e) => setCreatedAt(e.target.value)} value={CreatedAt} />
+                    <Input variant='filled' placeholder='Created At' type="datetime-local" marginBottom='5' width='50%' onChange={(e) => setCreatedAt(e.target.value)} value={CreatedAt} />
                 </Center>
 
                 <Center>
                     <Text fontSize='20px' marginRight={710} as='b'>Updated At</Text>
                 </Center>
                 <Center>
-                    <Input variant='filled' placeholder='Updated At' marginBottom='9' width='50%' onChange={(e) => setUpdatedAt(e.target.value)} value={UpdatedAt} />
+                    <Input variant='filled' placeholder='Updated At' type="datetime-local" marginBottom='9' width='50%' onChange={(e) => setUpdatedAt(e.target.value)} value={UpdatedAt} />
                 </Center>
 
                 <Center>
                     <Stack direction='row' spacing={4}>
-                        <Button colorScheme='blue' rightIcon={<EditIcon />} type='submit'>Edit</Button>
+                        <Button colorScheme='blue' rightIcon={<AddIcon />} type='submit'
+                            onClick={() =>
+                                toast({
+                                    title: 'Loading',
+                                    status: 'loading',
+                                    duration: 500,
+                                    isClosable: true,
+                                })
+                            }>Edit</Button>
                         <Link href='/homepage'>
-                            <Button colorScheme='blue' rightIcon={<CloseIcon />}>Cancel</Button>
+                            <Button colorScheme='blue' rightIcon={<CloseIcon />}
+                                onClick={() =>
+                                    toast({
+                                        title: 'Loading',
+                                        status: 'loading',
+                                        duration: 500,
+                                        isClosable: true,
+                                    })
+                                }>Cancel</Button>
                         </Link>
+
                     </Stack>
                 </Center>
-                <br />
             </form>
         </>
     );
