@@ -4,7 +4,7 @@ import { DeleteIcon, CloseIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import { API, APIName } from '/QuanLyPhongMay/QuanLyPM/src/service/apiconfig';
+import { API, APIName } from '/REACTJS_LYTHUYET/WebBanHang/Webbanhang/quanly/src/service/apiconfig';
 
 export default function DeleteRoom() {
 
@@ -19,7 +19,7 @@ export default function DeleteRoom() {
             .then((response) => {
                 alert('Successful')
                 console.log(response.data);
-                usenavigate('/homepage');
+                usenavigate('/assignmentpage');
             })
             .catch(function (error) {
                 alert('Error')
@@ -46,7 +46,7 @@ export default function DeleteRoom() {
                 <Center>
                     <Stack direction='row' spacing={4}>
                         <Button colorScheme='blue' rightIcon={<DeleteIcon />} type='submit'>Delete</Button>
-                        <Link href='/homepage'>
+                        <Link href='/assignmentpage'>
                             <Button colorScheme='blue' rightIcon={<CloseIcon />}>Cancel</Button>
                         </Link>
 

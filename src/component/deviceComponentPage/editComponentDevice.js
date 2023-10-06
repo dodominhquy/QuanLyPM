@@ -3,7 +3,7 @@ import { Text, Button, Stack, Link, useToast } from '@chakra-ui/react';
 import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import axios from 'axios';
-import { API, APIName } from '/QuanLyPhongMay/QuanLyPM/src/service/apiconfig';
+import { API, APIName } from '/REACTJS_LYTHUYET/WebBanHang/Webbanhang/quanly/src/service/apiconfig';
 import { useNavigate } from 'react-router-dom';
 
 export default function EditDeviceComponent() {
@@ -40,7 +40,7 @@ export default function EditDeviceComponent() {
                 .then((response) => {
                     alert('Success');
                     console.log(response.data);
-                    usenavigate('/homepage');
+                    usenavigate('/deviceComponentpage');
                 })
                 .catch(function (error) {
                     alert('error');
@@ -156,7 +156,7 @@ export default function EditDeviceComponent() {
                                     isClosable: true,
                                 })
                             }>Edit</Button>
-                        <Link href='/homepage'>
+                        <Link href='/deviceComponentpage'>
                             <Button colorScheme='blue' rightIcon={<CloseIcon />}
                                 onClick={() =>
                                     toast({

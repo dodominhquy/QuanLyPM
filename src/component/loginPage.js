@@ -53,7 +53,7 @@ export default function LoginPage() {
                   });
                 }
               }
-              usenavigate('/homepage');
+              usenavigate('/masterpage');
 
             } else {
               alert('Please Enter valid credentials');
@@ -100,7 +100,7 @@ export default function LoginPage() {
           >
 
             <GridItem pl='2' bg='white' area={'nav'} width='100%' height='100%'>
-              <Image src='wel.jpg' width='100%' height='100%' />
+              <Image src='wallpaperflare.com_wallpaper.jpg' width='100%' height='100%' />
             </GridItem>
 
             <GridItem pl='50' area={'main'} width='100%' height='100%' bgColor='white.700' textAlign='center'>
@@ -108,14 +108,14 @@ export default function LoginPage() {
               <br />
               <br />
               <br />
-              <Text fontSize='40px' color='Blue' as='b'>
+              <Text fontSize='40px' color='Blue' as='b' marginRight={50}>
                 LOGIN
               </Text>
               <FormControl marginTop='75'>
                 <Center marginRight={290}>
                   <FormLabel fontSize='20'>Username</FormLabel>
                 </Center>
-                <InputGroup marginLeft={190}>
+                <InputGroup marginLeft={150}>
                   <InputLeftElement pointerEvents='none'>
                     <InfoIcon color='gray.300' />
                   </InputLeftElement>
@@ -127,7 +127,7 @@ export default function LoginPage() {
                 <Center marginRight={290}>
                   <FormLabel fontSize='20'>Password</FormLabel>
                 </Center>
-                <InputGroup marginLeft={190}>
+                <InputGroup marginLeft={150}>
                   <InputLeftElement pointerEvents='none'>
                     <LockIcon color='gray.300' />
                   </InputLeftElement>
@@ -135,7 +135,7 @@ export default function LoginPage() {
                 </InputGroup>
               </FormControl>
               <br />
-              <Button colorScheme='blue' variant='solid' width='20%' type='submit' onClick={() =>
+              <Button colorScheme='blue' variant='solid' width='20%' type='submit' marginRight={10} onClick={() =>
                 toast({
                   title: 'Loading',
                   status: 'loading',

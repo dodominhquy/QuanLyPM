@@ -4,7 +4,7 @@ import { DeleteIcon, CloseIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import { API, APIName } from '/QuanLyPhongMay/QuanLyPM/src/service/apiconfig';
+import { API, APIName } from '/REACTJS_LYTHUYET/WebBanHang/Webbanhang/quanly/src/service/apiconfig';
 
 export default function DeleteDevice() {
 
@@ -18,7 +18,7 @@ export default function DeleteDevice() {
             .then((response) => {
                 alert('Successful')
                 console.log(response.data);
-                usenavigate('/homepage');
+                usenavigate('/devicepage');
             })
             .catch(function (error) {
                 alert('Error')
@@ -39,13 +39,13 @@ export default function DeleteDevice() {
                     <Text fontSize='20px' marginRight={745} as='b'>ID Device</Text>
                 </Center>
                 <Center>
-                    <Input variant='filled' placeholder='ID Room' marginBottom='5' width='50%' onChange={(e) => setIDDevice(e.target.value)} value={IDDevice} />
+                    <Input variant='filled' placeholder='ID Device' marginBottom='5' width='50%' onChange={(e) => setIDDevice(e.target.value)} value={IDDevice} />
                 </Center>
 
                 <Center>
                     <Stack direction='row' spacing={4}>
                         <Button colorScheme='blue' rightIcon={<DeleteIcon />} type='submit'>Delete</Button>
-                        <Link href='/homepage'>
+                        <Link href='/devicepage'>
                             <Button colorScheme='blue' rightIcon={<CloseIcon />}>Cancel</Button>
                         </Link>
 

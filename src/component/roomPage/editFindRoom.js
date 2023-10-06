@@ -6,19 +6,34 @@ import { useState } from 'react';
 import axios from 'axios';
 import { API, APIName } from '/REACTJS_LYTHUYET/WebBanHang/Webbanhang/quanly/src/service/apiconfig';
 
-export default function DeleteDeviceComponent() {
+export default function EditFindRoom() {
 
-    const [IDDEVICEComponent, setIDDEVICEComponent] = useState("");
+    const [IdRoom, setIdRoom] = useState("");
     const usenavigate = useNavigate();
 
-    const deleteDeviceCompoment = async () => {
+    const localStorage = window.localStorage;
 
-        await axios.delete(`${API}${APIName.DeviceCompoment}/${IDDEVICEComponent}`
+  localStorage.setItem('IdRoom', JSON.stringify(IdRoom));
+
+    const getIdRoom = async () => {
+
+        await axios.get(`${API}${APIName.Room}/getid/${IdRoom}`,
+        {
+            "IdRoom": `${IdRoom}`
+        }
         )
             .then((response) => {
                 alert('Successful')
                 console.log(response.data);
-                usenavigate('/deviceComponentpage');
+                window.onload = function () {
+                    if (localStorage) {
+                      document.getElementById('contactForm').addEventListener('submit', function () {
+                        var Username = document.getElementById('IdRoom').value;
+                        localStorage.setItem('IdRoom', Username);
+                      });
+                    }
+                  }
+                usenavigate('/editroom');
             })
             .catch(function (error) {
                 alert('Error')
@@ -31,21 +46,21 @@ export default function DeleteDeviceComponent() {
         <>
 
             <Center>
-                <Text fontSize='40px' as='b' color='Blue'>Delete Device Compoment</Text>
+                <Text fontSize='40px' as='b' color='Blue'>Find Room to Edit</Text>
             </Center>
             <br />
-            <form onSubmit={deleteDeviceCompoment}>
+            <form onSubmit={getIdRoom}>
                 <Center>
-                    <Text fontSize='20px' marginRight={745} as='b'>ID Device Compoment</Text>
+                    <Text fontSize='20px' marginRight={745} as='b'>ID Room</Text>
                 </Center>
                 <Center>
-                    <Input variant='filled' placeholder='ID Device Compoment' marginBottom='5' width='50%' onChange={(e) => setIDDEVICEComponent(e.target.value)} value={IDDEVICEComponent} />
+                    <Input variant='filled' placeholder='ID Room' marginBottom='5' width='50%' onChange={(e) => setIdRoom(e.target.value)} value={IdRoom} />
                 </Center>
 
                 <Center>
                     <Stack direction='row' spacing={4}>
                         <Button colorScheme='blue' rightIcon={<DeleteIcon />} type='submit'>Delete</Button>
-                        <Link href='/deviceComponentpage'>
+                        <Link href='/roompage'>
                             <Button colorScheme='blue' rightIcon={<CloseIcon />}>Cancel</Button>
                         </Link>
 
