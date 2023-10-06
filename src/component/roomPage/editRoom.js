@@ -4,7 +4,7 @@ import { EditIcon, CloseIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import { API, APIName } from '/REACTJS_LYTHUYET/WebBanHang/Webbanhang/quanly/src/service/apiconfig';
+import { API, APIName } from '/QuanLyPhongMay/QuanLyPM/src/service/apiconfig';
 
 export default function EditRoom() {
 
